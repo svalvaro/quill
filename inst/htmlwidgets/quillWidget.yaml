@@ -1,0 +1,13 @@
+dependencies:
+ - name: quill
+   version: 1.0.0
+   src: htmlwidgets/lib/quill-2.0.0
+   script:
+    - highlight.min.js
+    - katex.min.js
+    - quill.min.js
+   stylesheet:
+    - atom-one-dark.min.css
+    - katex.min.css
+    - quill.bubble.css
+    - quill.snow.css
