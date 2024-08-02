@@ -1,3 +1,10 @@
+#' Title
+#'
+#' @param input_vector
+#' @param format
+#'
+#' @return
+#' @export
 get_editor_content <- function(input_vector, format = "HTML") {
   switch (format,
           "JSON" = input_vector[1],
@@ -6,16 +13,19 @@ get_editor_content <- function(input_vector, format = "HTML") {
   )
 }
 
-generate_toolbar_options <- function(params) {
-  toolbar <- params |>
-    add_toolbar_binary_params() #|>
-    #add_param_list(params)
+format_toolbar_options <- function(params) {
+
+  toolbar <- list(
+    params_binary = format_binary_params(params),
+    params_list = format_multiple_choice_param(params$list, "list"),
+    params_script = format_multiple_choice_param(params$script, "script")
+  )
 
   print(toolbar)
   toolbar
 }
 
-add_toolbar_binary_params <- function(params) {
+format_binary_params <- function(params) {
   binary_names <- c(
     #align = TRUE,
     #background = TRUE,
@@ -31,10 +41,10 @@ add_toolbar_binary_params <- function(params) {
     #header = TRUE,
     #indent = TRUE,
     "link",
-    #list = NULL,
+    #list = NULL, ## done
     #size = TRUE,
     "strike" ,
-    #script = TRUE,
+    #script = TRUE, ## done
     "underline",
     "video" ,
     "code-block"
@@ -48,24 +58,9 @@ add_toolbar_binary_params <- function(params) {
     jsonlite::toJSON()
 }
 
-add_param_list <- function(json_string, params) {
-  if (is.null(params$list)) return(json_string)
-  stopifnot(all(params$list %in% c("ordered", "bullet", "check")))
-
-  list(
-    list = "ordered",
-    list = "bullet",
-    list = "check"
-  ) |> jsonlite::toJSON()
-
-  x <- list(foo = "", bar = 0)
-  params$list |>  jsonlite::toJSON()
-
-  json_list <- paste0("{ 'list' : '", params$list, "' }", collapse = ", ")
-  json_list2 <- paste0('\'', json_string, '\'', collapse = ',')
-  browser()
-  glue::glue(
-    "{json_list2}, {json_list}") |>
+format_multiple_choice_param <- function(param, name) {
+  tibble::tibble(
+    !!rlang::sym(name) := param
+  ) |>
     jsonlite::toJSON()
-
 }

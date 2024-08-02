@@ -23,7 +23,7 @@ quill <- function( # Sort Alphabetically lint
   list = NULL,
   size = TRUE,
   strike = TRUE,
-  script = TRUE,
+  script = NULL,
   underline = TRUE,
   video = FALSE,
   `code-block` = TRUE,
@@ -35,7 +35,7 @@ quill <- function( # Sort Alphabetically lint
   elementId = NULL
 ) {
 
-  toolbar_options <- generate_toolbar_options(
+  toolbar_options <- format_toolbar_options(
     list(
       align = align,
       background = background,
@@ -63,7 +63,7 @@ quill <- function( # Sort Alphabetically lint
 
   if (!is.null(toolbar)) toolbar_options <- toolbar
 
-  params <- list(
+    params <- list(
     toolbar_options = toolbar_options,
     theme = theme,
     placeholder = placeholder

@@ -15,7 +15,8 @@ server = function(input, output) {
       link = FALSE,
       bold = TRUE,
       formula = TRUE,
-     list = c("ordered", "bullet", "check")
+      list = c("ordered", "bullet", "check"),
+      script = c("sub", "super")
     )
   })
   observeEvent(input$editor2, {

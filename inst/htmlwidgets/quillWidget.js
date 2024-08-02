@@ -11,10 +11,15 @@ HTMLWidgets.widget({
       renderValue: function(params) {
         // TODO: code to render the widget, e.g.
         //el.innerHTML = editorWidget(toolbar_options = toolbar_options);
+        console.log(params.toolbar_options);
 
         toolbarOptions = [
           [{ header: [1, 2, 3, true] }],
-          params.toolbar_options,
+          params.toolbar_options.params_binary,
+          params.toolbar_options.params_list,
+          params.toolbar_options.params_script,
+
+
          // [['bold', 'italic'], ['underline', 'link']],
 
 
@@ -36,6 +41,8 @@ HTMLWidgets.widget({
 */
           ['clean']
         ]
+
+        console.log(toolbarOptions);
         var editorWidget = new Quill(el, {
           modules: {
             toolbar: toolbarOptions
