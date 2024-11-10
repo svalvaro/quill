@@ -64,3 +64,51 @@ format_multiple_choice_param <- function(param, name) {
   ) |>
     jsonlite::toJSON()
 }
+
+quill_options <- function(
+    align = TRUE,
+    background = TRUE,
+    blockquote = TRUE,
+    bold = TRUE,
+    color = TRUE,
+    direction = TRUE,
+    font = TRUE,
+    formula = FALSE,
+    code = FALSE,
+    italic = TRUE,
+    image = TRUE,
+    header = TRUE,
+    indent = TRUE,
+    link = TRUE,
+    list = NULL,
+    size = TRUE,
+    strike = TRUE,
+    script = NULL,
+    underline = TRUE,
+    video = FALSE,
+    `code-block` = TRUE
+) {
+  list(
+    align = align,
+    background = background,
+    blockquote = blockquote,
+    bold = bold,
+    color = color,
+    direction = direction,
+    font = font,
+    formula = formula,
+    code = code,
+    italic = italic,
+    image = image,
+    header = header,
+    indent = indent,
+    link = link,
+    list = list,
+    size = size,
+    strike = strike,
+    script = script,
+    underline = underline,
+    video = video,
+    `code-block` = `code-block`
+  )
+}

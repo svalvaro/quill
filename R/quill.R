@@ -6,64 +6,20 @@
 #'
 #' @export
 quill <- function( # Sort Alphabetically lint
-  align = TRUE,
-  background = TRUE,
-  blockquote = TRUE,
-  bold = TRUE,
-  color = TRUE,
-  direction = TRUE,
-  font = TRUE,
-  formula = FALSE,
-  code = FALSE,
-  italic = TRUE,
-  image = TRUE,
-  header = TRUE,
-  indent = TRUE,
-  link = TRUE,
-  list = NULL,
-  size = TRUE,
-  strike = TRUE,
-  script = NULL,
-  underline = TRUE,
-  video = FALSE,
-  `code-block` = TRUE,
+  quill_params = quill_options(),
   width = NULL,
   height = NULL,
   theme = "snow",
-  toolbar = NULL,
+  custom_toolbar = NULL,
   placeholder = "Placeholder message",
   elementId = NULL
 ) {
 
-  toolbar_options <- format_toolbar_options(
-    list(
-      align = align,
-      background = background,
-      blockquote = blockquote,
-      bold = bold,
-      color = color,
-      direction = direction,
-      font = font,
-      formula = formula,
-      code = code,
-      italic = italic,
-      image = image,
-      header = header,
-      indent = indent,
-      link = link,
-      list = list,
-      size = size,
-      strike = strike,
-      script = script,
-      underline = underline,
-      video = video,
-      `code-block` = `code-block`
-    )
-  )
+  toolbar_options <- format_toolbar_options(quill_params)
 
-  if (!is.null(toolbar)) toolbar_options <- toolbar
+  if (!is.null(custom_toolbar)) toolbar_options <- toolbar
 
-    params <- list(
+  params <- list(
     toolbar_options = toolbar_options,
     theme = theme,
     placeholder = placeholder
