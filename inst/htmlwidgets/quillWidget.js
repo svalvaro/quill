@@ -16,14 +16,16 @@ HTMLWidgets.widget({
         toolbarOptions = [
           [{ header: [1, 2, 3, true] }],
           params.toolbar_options.params_binary,
+          params.toolbar_options.params_align,
+          params.toolbar_options.params_background,
+          params.toolbar_options.params_color,
           params.toolbar_options.params_list,
           params.toolbar_options.params_script,
+          params.toolbar_options.params_direction,
+          params.toolbar_options.params_indent,
 
 
-         // [['bold', 'italic'], ['underline', 'link']],
-
-
-          /*['formula', 'font', 'color'],
+          /*
           [{ 'color': [] }, { 'background': [] }],
           [{ 'header': 1 }, { 'header': 2 }],               // custom button values
           [{ 'list': 'ordered'}, { 'list': 'bullet' }, { 'list': 'check' }],
