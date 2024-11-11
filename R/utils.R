@@ -97,7 +97,8 @@ format_multiple_choice_param <- function(param, name) {
 #' @return list
 #' @export
 #'
-#' @example inst/
+#' @examples
+#' quill(quill_params = quill_options(align = 'right', bold = FALSE))
 quill_options <- function(
     align = c('center', 'right'),
     background = c(),

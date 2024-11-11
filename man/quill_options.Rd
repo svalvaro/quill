@@ -71,7 +71,13 @@ current default.}
 
 \item{`code-block`}{Logical; `TRUE` or `FALSE` to include/exclude code block functionality.}
 }
+\value{
+list
+}
 \description{
 This function configures toolbar options for the editor, allowing customization of
 formatting features such as alignment, color, font styles, and more.
+}
+\examples{
+quill(quill_params = quill_options(align = 'right', bold = FALSE))
 }

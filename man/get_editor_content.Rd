@@ -2,13 +2,19 @@
 % Please edit documentation in R/utils.R
 \name{get_editor_content}
 \alias{get_editor_content}
-\title{Title}
+\title{Retrieve the content that the user has typed}
 \usage{
 get_editor_content(input_vector, format = "HTML")
 }
 \arguments{
-\item{format}{}
+\item{input_vector}{The input from the editor.}
+
+\item{format}{one of the three options: "HTML", "JSON" or "Text".}
+}
+\value{
+character
 }
 \description{
-Title
+This function retrieves the content that the user has writen in the editor.
+It can output it in three formats: "HTML, "JSON" or plain text.
 }

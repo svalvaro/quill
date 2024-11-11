@@ -15,7 +15,8 @@
 #' @return A HTML widget object.
 #'
 #' @import htmlwidgets
-#' @example inst/examples/shiny.R
+#' @examples
+#' quill(quill_params = quill_options(align = 'right'))
 #'
 #' @export
 quill <- function( # Sort Alphabetically lint
