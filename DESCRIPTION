@@ -1,11 +1,13 @@
 Package: quill
 Type: Package
-Title: What the Package Does (Title Case)
+Title: Provides an R interface for QuillJS, an open-source WYSIWYG editor.
 Version: 0.1.0
-Author: Who wrote it
+Author: Alvaro Sanchez-Villalba
 Maintainer: The package maintainer <yourself@somewhere.net>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
-License: What license is it under?
+Description: This package serves as a wrapper for the QuillJS library, allowing R users to 
+  integrate a rich text editor into their workflows. Use this package to easily add, customize, and 
+  manipulate QuillJS editors from within R scripts and Shiny applications.
+License: MIT
 Encoding: UTF-8
 LazyData: true
+RoxygenNote: 7.3.2
