@@ -1,8 +1,21 @@
-#' <Add Title>
+#' Create a text editor
 #'
-#' <Add Description>
+#' This function creates a QuillJS text editor widget using \pkg{htmlwidgets}. The
+#' widget can be rendered on HTML pages generated from R Markdown, Shiny, or
+#' other applications.
+#'
+#' @param quill_params Use the function `quill_options()` to define the parameters of the toolbar.
+#' @param width The width of the editor.
+#' @param height The height of the editor.
+#' @param theme Either 'snow' or 'bubble' are the supported themes.
+#' @param placeholder Placeholder text that will appear in the editor.
+#' @param elementId Use an explicit element ID for the widget
+#' (rather than an automatically generated one).
+#'
+#' @return A HTML widget object.
 #'
 #' @import htmlwidgets
+#' @example inst/examples/shiny.R
 #'
 #' @export
 quill <- function( # Sort Alphabetically lint
@@ -10,25 +23,18 @@ quill <- function( # Sort Alphabetically lint
   width = NULL,
   height = NULL,
   theme = "snow",
-  custom_toolbar = NULL,
   placeholder = "Placeholder message",
   elementId = NULL
 ) {
 
-  toolbar_options <- format_toolbar_options(quill_params)
-
-  if (!is.null(custom_toolbar)) toolbar_options <- toolbar
-
-  params <- list(
-    toolbar_options = toolbar_options,
-    theme = theme,
-    placeholder = placeholder
-  )
-
   # create widget
   htmlwidgets::createWidget(
     name = 'quillWidget',
-    x = params,
+    x = list(
+      toolbar_options = format_toolbar_options(quill_params),
+      theme = theme,
+      placeholder = placeholder
+    ),
     width = width,
     height = height,
     package = 'quill',

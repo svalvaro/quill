@@ -1,9 +1,12 @@
-#' Title
+#' Retrieve the content that the user has typed
 #'
-#' @param input_vector
-#' @param format
+#' This function retrieves the content that the user has writen in the editor.
+#' It can output it in three formats: "HTML, "JSON" or plain text.
 #'
-#' @return
+#' @param input_vector The input from the editor.
+#' @param format one of the three options: "HTML", "JSON" or "Text".
+#'
+#' @return character
 #' @export
 get_editor_content <- function(input_vector, format = "HTML") {
   switch (format,
@@ -23,27 +26,23 @@ format_toolbar_options <- function(params) {
     params_list = format_multiple_choice_param(params$list, "list"),
     params_script = format_multiple_choice_param(params$script, "script"),
     params_direction = format_multiple_choice_param(params$direction, "direction"),
-    params_indent = format_multiple_choice_param(params$indent, "indent")
+    params_indent = format_multiple_choice_param(params$indent, "indent"),
+    params_header = format_multiple_choice_param(params$header, "header"),
+    params_size = format_multiple_choice_param(params$size, "size")
   )
 
-  print(toolbar)
   toolbar
 }
 
 format_binary_params <- function(params) {
   binary_names <- c(
-    #align = TRUE,
-    #background = TRUE,
     "blockquote",
     "bold",
-    #font = TRUE,
     "formula",
     "code",
     "italic",
     "image",
-    #header = TRUE,
     "link",
-    #size = TRUE,
     "strike" ,
     "underline",
     "video" ,
@@ -65,53 +64,57 @@ format_multiple_choice_param <- function(param, name) {
     jsonlite::toJSON()
 }
 
-#' Options for the text editor
+#' Configure the Toolbar Options
 #'
-#' @param align A vector containing what types of list to include, e.g c('center', 'right')
-#' @param background A vector with the colors, if the vector is empty the defaults colours will appear. e.g
-#' c('red', 'blue', ''#32a852') or c().
-#' @param blockquote Either TRUE or FALSE
-#' @param bold Either TRUE or FALSE
-#' @param color A vector with the colors, if the vector is empty the defaults colours will appear. e.g
-#' c('red', 'blue', ''#32a852') or c().
-#' @param direction NULL or 'rtl'. Is the direction from which the text will be typed.
-#' @param font TO BE IMPLEMENTED
-#' @param formula Either TRUE or FALSE
-#' @param code Either TRUE or FALSE
-#' @param italic Either TRUE or FALSE
-#' @param image Either TRUE or FALSE
-#' @param header TO BE IMPLEMENTED
-#' @param indent A vector: c('-1', '+1') or NULL. To outdent/indent
-#' @param link Either TRUE or FALSE
-#' @param list A vector containing what types of list to include, e.g. c("ordered", "bullet", "check")
-#' @param size TO BE IMPLEMENTED
-#' @param strike Either TRUE or FALSE
-#' @param script  A vector containing what types of script to include, e.g. c("sub", "super")
-#' @param underline Either TRUE or FALSE
-#' @param video Either TRUE or FALSE
-#' @param `code-block` Either TRUE or FALSE
+#' This function configures toolbar options for the editor, allowing customization of
+#' formatting features such as alignment, color, font styles, and more.
 #'
-#' @return
+#' @param align A vector containing types of alignment, e.g., `c('center', 'right')`.
+#' @param background A vector of colors for the background. If empty, default colors will appear,
+#' e.g., `c('red', 'blue', '#32a852')` or `c()`.
+#' @param bold Logical; `TRUE` or `FALSE` to include/exclude bold functionality.
+#' @param code Logical; `TRUE` or `FALSE` to include/exclude inline code functionality.
+#' @param `code-block` Logical; `TRUE` or `FALSE` to include/exclude code block functionality.
+#' @param color A vector of colors for text color. If empty, default colors will appear,
+#' e.g., `c('red', 'blue', '#32a852')` or `c()`.
+#' @param direction Character; `NULL` or `"rtl"` to set the text input direction.
+#' @param font A vector; not implemented yet.
+#' @param formula Logical; `TRUE` or `FALSE` to include/exclude formula functionality.
+#' @param header A vector or list for header options. Example: `c(1, 2)` creates H1 and H2 buttons.
+#' Use `list(list(1, 2, 3))` for a collapsed dropdown with H1, H2, and H3.
+#' `TRUE`/`FALSE` can add or exclude the "Normal" button; `header = c(1, 2, 3, TRUE)`.
+#' @param image Logical; `TRUE` or `FALSE` to include/exclude image embedding functionality.
+#' @param indent A vector for indentation controls, e.g., `c('-1', '+1')` or `NULL`.
+#' @param italic Logical; `TRUE` or `FALSE` to include/exclude italic functionality.
+#' @param link Logical; `TRUE` or `FALSE` to include/exclude hyperlink functionality.
+#' @param list A vector specifying list types, e.g., `c("ordered", "bullet", "check")`.
+#' @param script A vector for script options, e.g., `c("sub", "super")`.
+#' @param size A vector specifying size options: `c('small', FALSE/TRUE, 'large', 'huge')`.
+#'  `FALSE`/`TRUE` controls the "Normal" button's inclusion, with selection depending on the
+#' current default.
+#' @param strike Logical; `TRUE` or `FALSE` to include/exclude strikethrough functionality.
+#'
+#' @return list
 #' @export
 #'
-#' @examples
+#' @example inst/
 quill_options <- function(
     align = c('center', 'right'),
-    background = NULL,
+    background = c(),
     blockquote = TRUE,
     bold = TRUE,
-    color = NULL,
+    color = c(),
     direction = 'rtl',
     font = NULL,
     formula = FALSE,
     code = FALSE,
     italic = TRUE,
     image = TRUE,
-    header = NULL,
+    header = list(list(1, 2, FALSE)),
     indent = c('-1', '+1'),
     link = TRUE,
     list = c("ordered", "bullet", "check"),
-    size = NULL,
+    size = c('small', 'large', 'huge'),
     strike = TRUE,
     script = c("sub", "super"),
     underline = TRUE,
@@ -134,7 +137,7 @@ quill_options <- function(
     indent = indent,
     link = link,
     list = list,
-    size = size,
+    size = list(as.list(size)),
     strike = strike,
     script = script,
     underline = underline,
