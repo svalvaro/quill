@@ -4,12 +4,12 @@
 \alias{format_multiple_choice_options}
 \title{Function that transforms a toolbar option that is a vector/list of choices to JSON format}
 \usage{
-format_multiple_choice_options(value, name)
+format_multiple_choice_options(name, value)
 }
 \arguments{
-\item{value}{The value(s) of the choice, e.g. c("center", "right")}
-
 \item{name}{The name of the choice, e.g. "align"}
+
+\item{value}{The value(s) of the choice, e.g. c("center", "right")}
 }
 \value{
 a json chr with the toolbar option and its values

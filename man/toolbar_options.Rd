@@ -16,11 +16,11 @@ toolbar_options(
   code = TRUE,
   italic = TRUE,
   image = TRUE,
-  header = list(list(1, 2, FALSE)),
+  header = list(c(1, 2, "normal_selected", 3)),
   indent = c("-1", "+1"),
   link = TRUE,
   list = c("ordered", "bullet", "check"),
-  size = c("small", "large", "huge"),
+  size = c("small", "normal_unselected", "large", "huge"),
   strike = TRUE,
   script = c("sub", "super"),
   underline = TRUE,
@@ -52,7 +52,10 @@ e.g., `c('red', 'blue', '#32a852')` or `c()`.}
 \item{image}{Logical; `TRUE` or `FALSE` to include/exclude image embedding functionality.}
 
 \item{header}{A vector or list for header options. Example: `c(1, 2)` creates H1 and H2 buttons.
-Use `list(list(1, 2, 3))` for a collapsed dropdown with H1, H2, and H3.
+Use `list(c(1, 2, 3, "normal_selected"/"normal_unselected"))` for a collapsed dropdown with H1,
+H2, and H3 and 'Normal'.
+`normal_selected" / "normal_unselected"` controls the "Normal" button's inclusion, with
+ selection depending on the current default.
 `TRUE`/`FALSE` can add or exclude the "Normal" button; `header = c(1, 2, 3, TRUE)`.}
 
 \item{indent}{A vector for indentation controls, e.g., `c('-1', '+1')` or `NULL`.}
@@ -61,9 +64,10 @@ Use `list(list(1, 2, 3))` for a collapsed dropdown with H1, H2, and H3.
 
 \item{list}{A vector specifying list types, e.g., `c("ordered", "bullet", "check")`.}
 
-\item{size}{A vector specifying size options: `c('small', FALSE/TRUE, 'large', 'huge')`.
- `FALSE`/`TRUE` controls the "Normal" button's inclusion, with selection depending on the
-current default.}
+\item{size}{A vector specifying size options: `c('small', "normal_selected"/"normal_unselected",
+'large', 'huge')`.
+ `normal_selected" / "normal_unselected"` controls the "Normal" button's inclusion, with
+ selection depending on the current default.}
 
 \item{strike}{Logical; `TRUE` or `FALSE` to include/exclude strikethrough functionality.}
 
