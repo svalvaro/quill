@@ -1,6 +1,6 @@
 library(shinytest2)
 test_that("{shinytest2} recording: shiny-e2e", {
-  app <- AppDriver$new(variant = platform_variant(), name = "shiny-e2e", height = 812,
+  app <- AppDriver$new(variant = platform_variant(os_name = FALSE), name = "shiny-e2e", height = 812,
                        width = 1139,  app_dir = system.file("examples/shiny", package = "quill"))
   app$expect_screenshot()
   app$set_inputs(editor_1 = c("{\"ops\":[{\"attributes\":{\"color\":\"#0066cc\"},\"insert\":\"hello there !\"},{\"insert\":\"\\n\"},{\"attributes\":{\"bold\":true},\"insert\":\"This is an E\"},{\"attributes\":{\"bold\":true,\"script\":\"super\"},\"insert\":\"2\"},{\"attributes\":{\"bold\":true},\"insert\":\"E (\"},{\"attributes\":{\"size\":\"large\",\"bold\":true},\"insert\":\"END TO END)\"},{\"attributes\":{\"bold\":true},\"insert\":\" \"},{\"attributes\":{\"bold\":true,\"code\":true},\"insert\":\"test \"},{\"attributes\":{\"bold\":true},\"insert\":\" \"},{\"attributes\":{\"color\":\"#9933ff\",\"bold\":true},\"insert\":\"to check that the Editor Works as expected\"},{\"insert\":\"\\n\\nX = RANDOM / FORMULA\\n\\nIf you open the .png, the editor will be empty and you can only read the rendered part below. The editor will be empty since the testing framework, shinytest2, doesn't register those bindings.\"},{\"attributes\":{\"blockquote\":true},\"insert\":\"\\n\"},{\"insert\":\"\\n\"}]}",
