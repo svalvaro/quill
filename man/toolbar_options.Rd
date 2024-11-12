@@ -9,11 +9,11 @@ toolbar_options(
   background = c(),
   blockquote = TRUE,
   bold = TRUE,
+  clean = TRUE,
   color = c(),
   direction = "rtl",
-  font = NULL,
-  formula = FALSE,
-  code = FALSE,
+  formula = TRUE,
+  code = TRUE,
   italic = TRUE,
   image = TRUE,
   header = list(list(1, 2, FALSE)),
@@ -36,12 +36,12 @@ e.g., `c('red', 'blue', '#32a852')` or `c()`.}
 
 \item{bold}{Logical; `TRUE` or `FALSE` to include/exclude bold functionality.}
 
+\item{clean}{Logical; `TRUE` or `FALSE` to include/exclude clean functionality.}
+
 \item{color}{A vector of colors for text color. If empty, default colors will appear,
 e.g., `c('red', 'blue', '#32a852')` or `c()`.}
 
 \item{direction}{Character; `NULL` or `"rtl"` to set the text input direction.}
-
-\item{font}{A vector; not implemented yet.}
 
 \item{formula}{Logical; `TRUE` or `FALSE` to include/exclude formula functionality.}
 

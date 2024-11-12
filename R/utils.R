@@ -18,52 +18,49 @@ get_editor_content <- function(input_vector, format = "HTML") {
   )
 }
 
+#' It formats the toolbar options selected by the user into a JSON format
+#'
+#' @param params Toolbar options selected by the user, the output of `toolbar_options()`.
+#'
+#' @return A list containing all the choices for the toolbar in JSON format.
 format_toolbar_options <- function(params) {
-  list(
-    params_binary = format_binary_params(params),
-    params_align = format_multiple_choice_param(params$align, "align"),
-    params_background = format_multiple_choice_param(params$background, "background"),
-    params_color = format_multiple_choice_param(params$color, "color"),
-    params_list = format_multiple_choice_param(params$list, "list"),
-    params_script = format_multiple_choice_param(params$script, "script"),
-    params_direction = format_multiple_choice_param(params$direction, "direction"),
-    params_indent = format_multiple_choice_param(params$indent, "indent"),
-    params_header = format_multiple_choice_param(params$header, "header"),
-    params_size = format_multiple_choice_param(params$size, "size")
+  multiple_choice_names <- c("align", "background", "color", "direction", "header", "indent",
+    "list", "size", "script")
+
+  multiple_choice_options <- params[names(params) %in% multiple_choice_names]
+
+  toolbar_opts_json  <-  purrr::map2(
+    multiple_choice_options,
+    names(multiple_choice_options),
+    format_multiple_choice_options
   )
+  toolbar_opts_json$binary_options <- format_binary_options(params)
+  toolbar_opts_json
 }
 
-#' Function that selects the toolbar options that are either TRUE/FALSE to JSON format
+#' Function that transforms the toolbar options that are either TRUE/FALSE to JSON format
 #'
-#' @param params Toolbar options selected by the user, the output of `toolbar_options()`
+#' @param params Toolbar options selected by the user, the output of `toolbar_options()`.
 #'
 #' @return a json chr with the toolbar options that were set to TRUE
-format_binary_params <- function(params) {
-  binary_names <- c(
-    "blockquote",
-    "bold",
-    "formula",
-    "code",
-    "italic",
-    "image",
-    "link",
-    "strike" ,
-    "underline",
-    "video" ,
-    "code-block"
-  )
-  binary_params <- params[names(params) %in% binary_names]
-  purrr::map2(binary_params, names(binary_params), function(value, name) {
+format_binary_options <- function(params) {
+  purrr::map2(params, names(params), function(value, name) {
     if (isTRUE(value)) name
   }) |>
-    purrr::discard(\(x) is.null(x)) |>
+    purrr::discard(is.null) |>
     unlist() |>
     jsonlite::toJSON()
 }
 
-format_multiple_choice_param <- function(param, name) {
+#' Function that transforms a toolbar option that is a vector/list of choices to JSON format
+#'
+#' @param value The value(s) of the choice, e.g. c("center", "right")
+#' @param name The name of the choice, e.g. "align"
+#'
+#' @return a json chr with the toolbar option and its values
+format_multiple_choice_options <- function(value, name) {
   tibble::tibble(
-    !!rlang::sym(name) := param
+    !!rlang::sym(name) := value
   ) |>
     jsonlite::toJSON()
 }
@@ -77,12 +74,12 @@ format_multiple_choice_param <- function(param, name) {
 #' @param background A vector of colors for the background. If empty, default colors will appear,
 #' e.g., `c('red', 'blue', '#32a852')` or `c()`.
 #' @param bold Logical; `TRUE` or `FALSE` to include/exclude bold functionality.
+#' @param clean Logical; `TRUE` or `FALSE` to include/exclude clean functionality.
 #' @param code Logical; `TRUE` or `FALSE` to include/exclude inline code functionality.
 #' @param `code-block` Logical; `TRUE` or `FALSE` to include/exclude code block functionality.
 #' @param color A vector of colors for text color. If empty, default colors will appear,
 #' e.g., `c('red', 'blue', '#32a852')` or `c()`.
 #' @param direction Character; `NULL` or `"rtl"` to set the text input direction.
-#' @param font A vector; not implemented yet.
 #' @param formula Logical; `TRUE` or `FALSE` to include/exclude formula functionality.
 #' @param header A vector or list for header options. Example: `c(1, 2)` creates H1 and H2 buttons.
 #' Use `list(list(1, 2, 3))` for a collapsed dropdown with H1, H2, and H3.
@@ -108,11 +105,11 @@ toolbar_options <- function(
     background = c(),
     blockquote = TRUE,
     bold = TRUE,
+    clean = TRUE,
     color = c(),
     direction = 'rtl',
-    font = NULL,
-    formula = FALSE,
-    code = FALSE,
+    formula = TRUE,
+    code = TRUE,
     italic = TRUE,
     image = TRUE,
     header = list(list(1, 2, FALSE)),
@@ -132,8 +129,8 @@ toolbar_options <- function(
     blockquote = blockquote,
     bold = bold,
     color = list(as.list(color)),
+    clean = clean,
     direction = direction,
-    font = font,
     formula = formula,
     code = code,
     italic = italic,

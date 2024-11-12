@@ -10,16 +10,16 @@ HTMLWidgets.widget({
 
       renderValue: function(params) {
         toolbarOptions = [
-          params.toolbar_options.params_header,
-          params.toolbar_options.params_binary,
-          params.toolbar_options.params_align,
-          params.toolbar_options.params_background,
-          params.toolbar_options.params_color,
-          params.toolbar_options.params_list,
-          params.toolbar_options.params_script,
-          params.toolbar_options.params_direction,
-          params.toolbar_options.params_indent,
-          params.toolbar_options.params_size,
+          params.toolbar_options.header,
+          params.toolbar_options.binary_options,
+          params.toolbar_options.align,
+          params.toolbar_options.background,
+          params.toolbar_options.color,
+          params.toolbar_options.list,
+          params.toolbar_options.script,
+          params.toolbar_options.direction,
+          params.toolbar_options.indent,
+          params.toolbar_options.size,
 
 
           /*
@@ -38,7 +38,7 @@ HTMLWidgets.widget({
           [{ 'align': [] }],
 
 */
-          ['clean']
+          //['clean']//
         ]
 
         var editorWidget = new Quill(el, {
