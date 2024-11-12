@@ -5,7 +5,7 @@
 \title{Create a text editor}
 \usage{
 quill(
-  quill_params = quill_options(),
+  toolbar = toolbar_options(),
   width = NULL,
   height = NULL,
   theme = "snow",
@@ -14,7 +14,7 @@ quill(
 )
 }
 \arguments{
-\item{quill_params}{Use the function `quill_options()` to define the parameters of the toolbar.}
+\item{toolbar}{Use the function `toolbar_options()` to define the parameters of the toolbar.}
 
 \item{width}{The width of the editor.}
 
@@ -36,6 +36,6 @@ widget can be rendered on HTML pages generated from R Markdown, Shiny, or
 other applications.
 }
 \examples{
-quill(quill_params = quill_options(align = 'right'))
+quill(toolbar = toolbar_options(align = 'right'))
 
 }

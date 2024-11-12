@@ -3,6 +3,6 @@
 export(get_editor_content)
 export(quill)
 export(quillOutput)
-export(quill_options)
 export(renderQuill)
+export(toolbar_options)
 import(htmlwidgets)

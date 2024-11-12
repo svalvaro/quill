@@ -4,7 +4,7 @@
 #' widget can be rendered on HTML pages generated from R Markdown, Shiny, or
 #' other applications.
 #'
-#' @param quill_params Use the function `quill_options()` to define the parameters of the toolbar.
+#' @param toolbar Use the function `toolbar_options()` to define the parameters of the toolbar.
 #' @param width The width of the editor.
 #' @param height The height of the editor.
 #' @param theme Either 'snow' or 'bubble' are the supported themes.
@@ -16,11 +16,11 @@
 #'
 #' @import htmlwidgets
 #' @examples
-#' quill(quill_params = quill_options(align = 'right'))
+#' quill(toolbar = toolbar_options(align = 'right'))
 #'
 #' @export
 quill <- function( # Sort Alphabetically lint
-  quill_params = quill_options(),
+  toolbar = toolbar_options(),
   width = NULL,
   height = NULL,
   theme = "snow",
@@ -32,7 +32,7 @@ quill <- function( # Sort Alphabetically lint
   htmlwidgets::createWidget(
     name = 'quillWidget',
     x = list(
-      toolbar_options = format_toolbar_options(quill_params),
+      toolbar_options = format_toolbar_options(toolbar),
       theme = theme,
       placeholder = placeholder
     ),

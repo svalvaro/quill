@@ -9,6 +9,8 @@
 #' @return character
 #' @export
 get_editor_content <- function(input_vector, format = "HTML") {
+  stopifnot(format %in% c("JSON", "Text", "HTML"))
+
   switch (format,
           "JSON" = input_vector[1],
           "Text" = input_vector[2],
@@ -17,8 +19,7 @@ get_editor_content <- function(input_vector, format = "HTML") {
 }
 
 format_toolbar_options <- function(params) {
-
-  toolbar <- list(
+  list(
     params_binary = format_binary_params(params),
     params_align = format_multiple_choice_param(params$align, "align"),
     params_background = format_multiple_choice_param(params$background, "background"),
@@ -30,10 +31,13 @@ format_toolbar_options <- function(params) {
     params_header = format_multiple_choice_param(params$header, "header"),
     params_size = format_multiple_choice_param(params$size, "size")
   )
-
-  toolbar
 }
 
+#' Function that selects the toolbar options that are either TRUE/FALSE to JSON format
+#'
+#' @param params Toolbar options selected by the user, the output of `toolbar_options()`
+#'
+#' @return a json chr with the toolbar options that were set to TRUE
 format_binary_params <- function(params) {
   binary_names <- c(
     "blockquote",
@@ -98,8 +102,8 @@ format_multiple_choice_param <- function(param, name) {
 #' @export
 #'
 #' @examples
-#' quill(quill_params = quill_options(align = 'right', bold = FALSE))
-quill_options <- function(
+#' quill(toolbar = toolbar_options(align = 'right', bold = FALSE))
+toolbar_options <- function(
     align = c('center', 'right'),
     background = c(),
     blockquote = TRUE,

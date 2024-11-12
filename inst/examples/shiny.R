@@ -7,6 +7,7 @@ ui = shinyUI(fluidPage(
       quillOutput("editor_1")
     ),
     div(
+      hr(),
       "You can easily render what the user is writing as HTML",
       htmlOutput('rendered_output')
     )
@@ -16,7 +17,7 @@ ui = shinyUI(fluidPage(
 server = function(input, output) {
   output$editor_1 <- renderQuill({
     quill(
-      quill_params = quill_options()
+      toolbar = toolbar_options()
     )
   })
   observeEvent(input$editor_1, {
