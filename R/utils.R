@@ -30,11 +30,12 @@ format_toolbar_options <- function(params) {
   multiple_choice_options <- params[names(params) %in% multiple_choice_names]
 
   toolbar_opts_json  <-  purrr::map2(
-    multiple_choice_options,
     names(multiple_choice_options),
+    multiple_choice_options,
     format_multiple_choice_options
-  )
+  ) |> purrr::set_names( names(multiple_choice_options))
   toolbar_opts_json$binary_options <- format_binary_options(params)
+
   toolbar_opts_json
 }
 
@@ -58,11 +59,21 @@ format_binary_options <- function(params) {
 #' @param name The name of the choice, e.g. "align"
 #'
 #' @return a json chr with the toolbar option and its values
-format_multiple_choice_options <- function(value, name) {
-  tibble::tibble(
+format_multiple_choice_options <- function(name, value) {
+  output <- tibble::tibble(
     !!rlang::sym(name) := value
   ) |>
     jsonlite::toJSON()
+
+  # Note: This part is when the user wants to add a 'Normal' choice either selected or not, in
+  # one of their multiple choice inputs such as the header.
+  if ("normal_selected" %in% unlist(value)) {
+    output <- gsub('"normal_selected"' , replacement = "false", output)
+  } else if ("normal_unselected" %in% unlist(value)) {
+    output <- gsub(pattern = '"normal_unselected"' , replacement = "true", output)
+  }
+
+  output
 }
 
 #' Configure the Toolbar Options
@@ -82,7 +93,10 @@ format_multiple_choice_options <- function(value, name) {
 #' @param direction Character; `NULL` or `"rtl"` to set the text input direction.
 #' @param formula Logical; `TRUE` or `FALSE` to include/exclude formula functionality.
 #' @param header A vector or list for header options. Example: `c(1, 2)` creates H1 and H2 buttons.
-#' Use `list(list(1, 2, 3))` for a collapsed dropdown with H1, H2, and H3.
+#' Use `list(c(1, 2, 3, "normal_selected"/"normal_unselected"))` for a collapsed dropdown with H1,
+#' H2, and H3 and 'Normal'.
+#' `normal_selected" / "normal_unselected"` controls the "Normal" button's inclusion, with
+#'  selection depending on the current default.
 #' `TRUE`/`FALSE` can add or exclude the "Normal" button; `header = c(1, 2, 3, TRUE)`.
 #' @param image Logical; `TRUE` or `FALSE` to include/exclude image embedding functionality.
 #' @param indent A vector for indentation controls, e.g., `c('-1', '+1')` or `NULL`.
@@ -90,9 +104,10 @@ format_multiple_choice_options <- function(value, name) {
 #' @param link Logical; `TRUE` or `FALSE` to include/exclude hyperlink functionality.
 #' @param list A vector specifying list types, e.g., `c("ordered", "bullet", "check")`.
 #' @param script A vector for script options, e.g., `c("sub", "super")`.
-#' @param size A vector specifying size options: `c('small', FALSE/TRUE, 'large', 'huge')`.
-#'  `FALSE`/`TRUE` controls the "Normal" button's inclusion, with selection depending on the
-#' current default.
+#' @param size A vector specifying size options: `c('small', "normal_selected"/"normal_unselected",
+#' 'large', 'huge')`.
+#'  `normal_selected" / "normal_unselected"` controls the "Normal" button's inclusion, with
+#'  selection depending on the current default.
 #' @param strike Logical; `TRUE` or `FALSE` to include/exclude strikethrough functionality.
 #'
 #' @return list
@@ -112,11 +127,11 @@ toolbar_options <- function(
     code = TRUE,
     italic = TRUE,
     image = TRUE,
-    header = list(list(1, 2, FALSE)),
+    header = list(c(1, 2, "normal_selected", 3)),
     indent = c('-1', '+1'),
     link = TRUE,
     list = c("ordered", "bullet", "check"),
-    size = c('small', 'large', 'huge'),
+    size = c('small', "normal_unselected", 'large', 'huge'),
     strike = TRUE,
     script = c("sub", "super"),
     underline = TRUE,
@@ -139,7 +154,7 @@ toolbar_options <- function(
     indent = indent,
     link = link,
     list = list,
-    size = list(as.list(size)),
+    size = list(size),
     strike = strike,
     script = script,
     underline = underline,

@@ -1,13 +1,11 @@
 describe("get_editor_content", {
-
-  # Arrange
-   mock_content <- list(
-    "{\"ops\":[{\"attributes\":{\"color\":\"#0066cc\"},\"insert\":\"Hello, world!\"}]}",
-    "Hello, world!",
-    "<p><span style=\"color: rgb(0, 102, 204);\">Hello, world!</span></p>"
-  ) |> as.character()
-
   it("returns correctly the content from the editor in the selected format", {
+    # Arrange
+    mock_content <- list(
+      "{\"ops\":[{\"attributes\":{\"color\":\"#0066cc\"},\"insert\":\"Hello, world!\"}]}",
+      "Hello, world!",
+      "<p><span style=\"color: rgb(0, 102, 204);\">Hello, world!</span></p>"
+    ) |> as.character()
 
     # Assert
     expect_equal(get_editor_content(mock_content, "JSON"), mock_content[1])
@@ -32,6 +30,7 @@ describe("format_binary_options", {
 
     # Act
     result <- format_binary_options(demo_parameters)
+
     # Assert
     expect_equal(result, jsonlite::toJSON(c("code", "italic")))
   })
@@ -64,6 +63,7 @@ describe("format_binary_options", {
 
     # Act
     result <- format_binary_options(demo_parameters)
+
     # Assert
     expect_equal(
       result,
@@ -71,5 +71,31 @@ describe("format_binary_options", {
         c("blockquote","bold","italic","image","link","strike","underline","code-block")
       )
     )
+  })
+})
+
+describe("format_multiple_choice_options", {
+  it("returns a JSON chr with the name adevnd choices selected by the user", {
+    # Act
+      result <- format_multiple_choice_options("align", c("center", "right"))
+
+    # Assert
+      expect_equal(
+        result,
+        structure("[{\"align\":\"center\"},{\"align\":\"right\"}]", class = "json")
+      )
+  })
+
+  it("correctly transforms the 'normal_unselected' or 'normal_selected' to true or false", {
+    # Act
+    result_header<- format_multiple_choice_options("header", list(c(1, 2, "normal_unselected")))
+    result_size <- format_multiple_choice_options(
+      "size",
+      list(c('small', "normal_unselected", 'large'))
+    )
+
+    # Assert
+    expect_equal(result_header, structure("[{\"header\":[\"1\",\"2\",true]}]", class = "json"))
+    expect_equal(result_size, structure("[{\"size\":[\"small\",true,\"large\"]}]", class = "json"))
   })
 })

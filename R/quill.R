@@ -14,7 +14,6 @@
 #'
 #' @return A HTML widget object.
 #'
-#' @import htmlwidgets
 #' @examples
 #' quill(toolbar = toolbar_options(align = 'right'))
 #'
