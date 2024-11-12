@@ -18,58 +18,58 @@ describe("get_editor_content", {
   it("Returns an error if the user selects a wrong format", {
     expect_error(get_editor_content(mock_content, "LaTeX"))
   })
+})
 
-  describe("format_binary_params", {
-    it("returns a JSON string with the options that were set to TRUE", {
-      # Arrange
-      demo_parameters <- list(
-        code = TRUE,
-        bold = FALSE,
-        italic = TRUE,
-        align = c("center", "right")
+describe("format_binary_options", {
+  it("returns a JSON string with the options that were set to TRUE", {
+    # Arrange
+    demo_parameters <- list(
+      code = TRUE,
+      bold = FALSE,
+      italic = TRUE,
+      align = c("center", "right")
+    )
+
+    # Act
+    result <- format_binary_options(demo_parameters)
+    # Assert
+    expect_equal(result, jsonlite::toJSON(c("code", "italic")))
+  })
+
+  it("returns a JSON string with the options that were set to TRUE in a more complex scenario", {
+    # Arrange
+    demo_parameters <- list(
+      align = c("center", "right"),
+      background = list(list()),
+      blockquote = TRUE,
+      bold = TRUE,
+      color = list(list()),
+      direction = "rtl",
+      font = NULL,
+      formula = FALSE,
+      code = FALSE,
+      italic = TRUE,
+      image = TRUE,
+      header = list(list(1, 2, FALSE)),
+      indent = c("-1", "+1"),
+      link = TRUE,
+      list = c("ordered", "bullet", "check"),
+      size = list(list("small", "large", "huge")),
+      strike = TRUE,
+      script = c("sub", "super"),
+      underline = TRUE,
+      video = FALSE,
+      `code-block` = TRUE
+    )
+
+    # Act
+    result <- format_binary_options(demo_parameters)
+    # Assert
+    expect_equal(
+      result,
+      jsonlite::toJSON(
+        c("blockquote","bold","italic","image","link","strike","underline","code-block")
       )
-
-      # Act
-      result <- format_binary_params(demo_parameters)
-      # Assert
-      expect_equal(result, jsonlite::toJSON(c("code", "italic")))
-    })
-
-    it("returns a JSON string with the options that were set to TRUE in a more complex scenario", {
-      # Arrange
-      demo_parameters <- list(
-        align = c("center", "right"),
-        background = list(list()),
-        blockquote = TRUE,
-        bold = TRUE,
-        color = list(list()),
-        direction = "rtl",
-        font = NULL,
-        formula = FALSE,
-        code = FALSE,
-        italic = TRUE,
-        image = TRUE,
-        header = list(list(1, 2, FALSE)),
-        indent = c("-1", "+1"),
-        link = TRUE,
-        list = c("ordered", "bullet", "check"),
-        size = list(list("small", "large", "huge")),
-        strike = TRUE,
-        script = c("sub", "super"),
-        underline = TRUE,
-        video = FALSE,
-        `code-block` = TRUE
-      )
-
-      # Act
-      result <- format_binary_params(demo_parameters)
-      # Assert
-      expect_equal(
-        result,
-        jsonlite::toJSON(
-          c("blockquote","bold","italic","image","link","strike","underline","code-block")
-        )
-      )
-    })
+    )
   })
 })
