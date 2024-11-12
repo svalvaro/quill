@@ -17,7 +17,8 @@ ui = shinyUI(fluidPage(
 server = function(input, output) {
   output$editor_1 <- renderQuill({
     quill(
-      toolbar = toolbar_options()
+      toolbar = toolbar_options(header = list(c(1,2, "normal_selected", 3, 4)),
+                                              size = c("large", "normal_selected"))
     )
   })
   observeEvent(input$editor_1, {
