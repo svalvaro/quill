@@ -3,5 +3,5 @@ test_that("shiny app works", {
   skip_on_cran()
 
   appdir <- system.file(package = "quill", "examples/shiny")
-  test_app(appdir)
+  shinytest2::test_app(app_dir = appdir)
 })

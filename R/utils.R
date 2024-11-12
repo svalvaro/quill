@@ -25,7 +25,7 @@ get_editor_content <- function(input_vector, format = "HTML") {
 #' @return A list containing all the choices for the toolbar in JSON format.
 format_toolbar_options <- function(params) {
   multiple_choice_names <- c("align", "background", "color", "direction", "header", "indent",
-    "list", "size", "script")
+                             "list", "size", "script")
 
   multiple_choice_options <- params[names(params) %in% multiple_choice_names]
 
@@ -33,7 +33,7 @@ format_toolbar_options <- function(params) {
     names(multiple_choice_options),
     multiple_choice_options,
     format_multiple_choice_options
-  ) |> purrr::set_names( names(multiple_choice_options))
+  ) |> purrr::set_names(names(multiple_choice_options))
   toolbar_opts_json$binary_options <- format_binary_options(params)
 
   toolbar_opts_json
@@ -68,9 +68,9 @@ format_multiple_choice_options <- function(name, value) {
   # Note: This part is when the user wants to add a 'Normal' choice either selected or not, in
   # one of their multiple choice inputs such as the header.
   if ("normal_selected" %in% unlist(value)) {
-    output <- gsub('"normal_selected"' , replacement = "false", output)
+    output <- gsub('"normal_selected"', replacement = "false", output)
   } else if ("normal_unselected" %in% unlist(value)) {
-    output <- gsub(pattern = '"normal_unselected"' , replacement = "true", output)
+    output <- gsub(pattern = '"normal_unselected"', replacement = "true", output)
   }
 
   output
@@ -116,27 +116,27 @@ format_multiple_choice_options <- function(name, value) {
 #' @examples
 #' quill(toolbar = toolbar_options(align = 'right', bold = FALSE))
 toolbar_options <- function(
-    align = c('center', 'right'),
-    background = c(),
-    blockquote = TRUE,
-    bold = TRUE,
-    clean = TRUE,
-    color = c(),
-    direction = 'rtl',
-    formula = TRUE,
-    code = TRUE,
-    italic = TRUE,
-    image = TRUE,
-    header = list(c(1, 2, "normal_selected", 3)),
-    indent = c('-1', '+1'),
-    link = TRUE,
-    list = c("ordered", "bullet", "check"),
-    size = c('small', "normal_unselected", 'large', 'huge'),
-    strike = TRUE,
-    script = c("sub", "super"),
-    underline = TRUE,
-    video = FALSE,
-    `code-block` = TRUE
+  align = c("center", "right"),
+  background = c(),
+  blockquote = TRUE,
+  bold = TRUE,
+  clean = TRUE,
+  color = c(),
+  direction = "rtl",
+  formula = TRUE,
+  code = TRUE,
+  italic = TRUE,
+  image = TRUE,
+  header = list(c(1, 2, "normal_selected", 3)),
+  indent = c("-1", "+1"),
+  link = TRUE,
+  list = c("ordered", "bullet", "check"),
+  size = c("small", "normal_unselected", "large", "huge"),
+  strike = TRUE,
+  script = c("sub", "super"),
+  underline = TRUE,
+  video = FALSE,
+  `code-block` = TRUE
 ) {
   list(
     align = align,

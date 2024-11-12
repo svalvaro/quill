@@ -29,7 +29,7 @@ quill <- function( # Sort Alphabetically lint
 
   # create widget
   htmlwidgets::createWidget(
-    name = 'quillWidget',
+    name = "quillWidget",
     x = list(
       toolbar_options = format_toolbar_options(toolbar),
       theme = theme,
@@ -37,7 +37,7 @@ quill <- function( # Sort Alphabetically lint
     ),
     width = width,
     height = height,
-    package = 'quill',
+    package = "quill",
     elementId = elementId
   )
 }
@@ -59,8 +59,8 @@ quill <- function( # Sort Alphabetically lint
 #' @name quill-shiny
 #'
 #' @export
-quillOutput <- function(outputId, width = '100%', height = '400px'){
-  htmlwidgets::shinyWidgetOutput(outputId, 'quillWidget', width, height, package = 'quill')
+quillOutput <- function(outputId, width = "100%", height = "400px") {
+  htmlwidgets::shinyWidgetOutput(outputId, "quillWidget", width, height, package = "quill")
 }
 
 #' @rdname quill-shiny

@@ -68,7 +68,7 @@ describe("format_binary_options", {
     expect_equal(
       result,
       jsonlite::toJSON(
-        c("blockquote","bold","italic","image","link","strike","underline","code-block")
+        c("blockquote", "bold", "italic", "image", "link", "strike", "underline", "code-block")
       )
     )
   })
@@ -77,21 +77,21 @@ describe("format_binary_options", {
 describe("format_multiple_choice_options", {
   it("returns a JSON chr with the name adevnd choices selected by the user", {
     # Act
-      result <- format_multiple_choice_options("align", c("center", "right"))
+    result <- format_multiple_choice_options("align", c("center", "right"))
 
     # Assert
-      expect_equal(
-        result,
-        structure("[{\"align\":\"center\"},{\"align\":\"right\"}]", class = "json")
-      )
+    expect_equal(
+      result,
+      structure("[{\"align\":\"center\"},{\"align\":\"right\"}]", class = "json")
+    )
   })
 
   it("correctly transforms the 'normal_unselected' or 'normal_selected' to true or false", {
     # Act
-    result_header<- format_multiple_choice_options("header", list(c(1, 2, "normal_unselected")))
+    result_header <- format_multiple_choice_options("header", list(c(1, 2, "normal_unselected")))
     result_size <- format_multiple_choice_options(
       "size",
-      list(c('small', "normal_unselected", 'large'))
+      list(c("small", "normal_unselected", "large"))
     )
 
     # Assert
@@ -168,7 +168,7 @@ describe("format_toolbar_options", {
       size = structure("[{\"size\":[\"large\",false]}]", class = "json"),
       script = structure("[{\"script\":\"sub\"},{\"script\":\"super\"}]", class = "json"),
       binary_options = structure(
-        "[\"blockquote\",\"bold\",\"clean\",\"formula\",\"code\",\"italic\",\"image\",\"link\",\"strike\",\"underline\",\"code-block\"]",
+        "[\"blockquote\",\"bold\",\"clean\",\"formula\",\"code\",\"italic\",\"image\",\"link\",\"strike\",\"underline\",\"code-block\"]", #nolint
         class = "json"
       )
     )
