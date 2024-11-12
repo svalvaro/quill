@@ -162,3 +162,4 @@ toolbar_options <- function(
     `code-block` = `code-block`
   )
 }
+

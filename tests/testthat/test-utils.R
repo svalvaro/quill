@@ -99,3 +99,80 @@ describe("format_multiple_choice_options", {
     expect_equal(result_size, structure("[{\"size\":[\"small\",true,\"large\"]}]", class = "json"))
   })
 })
+
+
+describe("format_toolbar_options", {
+  it("formats correctly into a list of json strings a couple of params", {
+    # Arrange
+    demo_toolbar_choices <- list(
+      align = c("center", "right"),
+      underline = FALSE,
+      video = TRUE,
+      `code-block` = TRUE
+    )
+
+    # Act
+    results <- format_toolbar_options(demo_toolbar_choices)
+
+    # Assert
+    expected_result <- list(
+      align = structure("[{\"align\":\"center\"},{\"align\":\"right\"}]", class = "json"),
+      binary_options = structure("[\"video\",\"code-block\"]", class = "json")
+    )
+
+    expect_equal(results, expected_result)
+  })
+
+  it("formats correctly when there are many choices of different type", {
+    # Arrange
+    demo_toolbar_choices <- list(
+      align = c("center", "right"),
+      background = list(list()),
+      blockquote = TRUE,
+      bold = TRUE,
+      color = list(list()),
+      clean = TRUE,
+      direction = "rtl",
+      formula = TRUE,
+      code = TRUE,
+      italic = TRUE,
+      image = TRUE,
+      header = list(c("1", "2", "normal_selected", "3", "4")),
+      indent = c("-1", "+1"),
+      link = TRUE,
+      list = c("ordered", "bullet", "check"),
+      size = list(c("large", "normal_selected")),
+      strike = TRUE,
+      script = c("sub", "super"),
+      underline = TRUE,
+      video = FALSE,
+      `code-block` = TRUE
+    )
+
+    # Act
+    results <- format_toolbar_options(demo_toolbar_choices)
+
+    # Assert
+
+    expected_result <- list(
+      align = structure("[{\"align\":\"center\"},{\"align\":\"right\"}]", class = "json"),
+      background = structure("[{\"background\":[]}]", class = "json"),
+      color = structure("[{\"color\":[]}]", class = "json"),
+      direction = structure("[{\"direction\":\"rtl\"}]", class = "json"),
+      header = structure("[{\"header\":[\"1\",\"2\",false,\"3\",\"4\"]}]", class = "json"),
+      indent = structure("[{\"indent\":\"-1\"},{\"indent\":\"+1\"}]", class = "json"),
+      list = structure(
+        "[{\"list\":\"ordered\"},{\"list\":\"bullet\"},{\"list\":\"check\"}]",
+        class = "json"
+      ),
+      size = structure("[{\"size\":[\"large\",false]}]", class = "json"),
+      script = structure("[{\"script\":\"sub\"},{\"script\":\"super\"}]", class = "json"),
+      binary_options = structure(
+        "[\"blockquote\",\"bold\",\"clean\",\"formula\",\"code\",\"italic\",\"image\",\"link\",\"strike\",\"underline\",\"code-block\"]",
+        class = "json"
+      )
+    )
+
+    expect_equal(results, expected_result)
+  })
+})
