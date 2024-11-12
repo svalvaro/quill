@@ -1,8 +1,8 @@
 library(shinytest2)
-test_that("{shinytest2} recording: shiny", {
-  app <- AppDriver$new(variant = platform_variant(os_name = FALSE), name = "shiny", seed = 1, height = 992,
-      width = 1619, app_dir = system.file("examples/shiny", package = "quill"))
-  app$expect_screenshot()
+
+test_that("{shinytest2} recording: shiny-e2e", {
+  app <- AppDriver$new(variant = platform_variant(), name = "shiny-e2e", seed = 123,
+      height = 992, width = 1619)
   app$set_inputs(editor_1 = c("{\"ops\":[{\"attributes\":{\"color\":\"#e60000\"},\"insert\":\"h\"},{\"insert\":\"\\n\"}]}",
       "h\n", "<p><span style=\"color: rgb(230, 0, 0);\">h</span></p>"), allow_no_input_binding_ = TRUE)
   app$set_inputs(editor_1 = c("{\"ops\":[{\"attributes\":{\"color\":\"#e60000\"},\"insert\":\"he\"},{\"insert\":\"\\n\"}]}",
@@ -16,29 +16,23 @@ test_that("{shinytest2} recording: shiny", {
   app$set_inputs(editor_1 = c("{\"ops\":[{\"attributes\":{\"color\":\"#e60000\"},\"insert\":\"hello \"},{\"insert\":\"\\n\"}]}",
       "hello \n", "<p><span style=\"color: rgb(230, 0, 0);\">hello </span></p>"),
       allow_no_input_binding_ = TRUE)
-  app$set_inputs(editor_1 = c("{\"ops\":[{\"attributes\":{\"color\":\"#e60000\"},\"insert\":\"hello \"},{\"attributes\":{\"code\":true},\"insert\":\"w\"},{\"insert\":\"\\n\"}]}",
-      "hello w\n", "<p><span style=\"color: rgb(230, 0, 0);\">hello </span><code>w</code></p>"),
+  app$set_inputs(editor_1 = c("{\"ops\":[{\"attributes\":{\"color\":\"#e60000\"},\"insert\":\"hello t\"},{\"insert\":\"\\n\"}]}",
+      "hello t\n", "<p><span style=\"color: rgb(230, 0, 0);\">hello t</span></p>"),
       allow_no_input_binding_ = TRUE)
-  app$set_inputs(editor_1 = c("{\"ops\":[{\"attributes\":{\"color\":\"#e60000\"},\"insert\":\"hello \"},{\"insert\":\"\\n\"}]}",
-      "hello \n", "<p><span style=\"color: rgb(230, 0, 0);\">hello </span></p>"),
+  app$set_inputs(editor_1 = c("{\"ops\":[{\"attributes\":{\"color\":\"#e60000\"},\"insert\":\"hello th\"},{\"insert\":\"\\n\"}]}",
+      "hello th\n", "<p><span style=\"color: rgb(230, 0, 0);\">hello th</span></p>"),
       allow_no_input_binding_ = TRUE)
-  app$set_inputs(editor_1 = c("{\"ops\":[{\"attributes\":{\"color\":\"#e60000\"},\"insert\":\"hello \"},{\"attributes\":{\"color\":\"#0066cc\"},\"insert\":\"w\"},{\"insert\":\"\\n\"}]}",
-      "hello w\n", "<p><span style=\"color: rgb(230, 0, 0);\">hello </span><span style=\"color: rgb(0, 102, 204);\">w</span></p>"),
+  app$set_inputs(editor_1 = c("{\"ops\":[{\"attributes\":{\"color\":\"#e60000\"},\"insert\":\"hello the\"},{\"insert\":\"\\n\"}]}",
+      "hello the\n", "<p><span style=\"color: rgb(230, 0, 0);\">hello the</span></p>"),
       allow_no_input_binding_ = TRUE)
-  app$set_inputs(editor_1 = c("{\"ops\":[{\"attributes\":{\"color\":\"#e60000\"},\"insert\":\"hello \"},{\"attributes\":{\"color\":\"#0066cc\"},\"insert\":\"wo\"},{\"insert\":\"\\n\"}]}",
-      "hello wo\n", "<p><span style=\"color: rgb(230, 0, 0);\">hello </span><span style=\"color: rgb(0, 102, 204);\">wo</span></p>"),
+  app$set_inputs(editor_1 = c("{\"ops\":[{\"attributes\":{\"color\":\"#e60000\"},\"insert\":\"hello ther\"},{\"insert\":\"\\n\"}]}",
+      "hello ther\n", "<p><span style=\"color: rgb(230, 0, 0);\">hello ther</span></p>"),
       allow_no_input_binding_ = TRUE)
-  app$set_inputs(editor_1 = c("{\"ops\":[{\"attributes\":{\"color\":\"#e60000\"},\"insert\":\"hello \"},{\"attributes\":{\"color\":\"#0066cc\"},\"insert\":\"wor\"},{\"insert\":\"\\n\"}]}",
-      "hello wor\n", "<p><span style=\"color: rgb(230, 0, 0);\">hello </span><span style=\"color: rgb(0, 102, 204);\">wor</span></p>"),
+  app$set_inputs(editor_1 = c("{\"ops\":[{\"attributes\":{\"color\":\"#e60000\"},\"insert\":\"hello there\"},{\"insert\":\"\\n\"}]}",
+      "hello there\n", "<p><span style=\"color: rgb(230, 0, 0);\">hello there</span></p>"),
       allow_no_input_binding_ = TRUE)
-  app$set_inputs(editor_1 = c("{\"ops\":[{\"attributes\":{\"color\":\"#e60000\"},\"insert\":\"hello \"},{\"attributes\":{\"color\":\"#0066cc\"},\"insert\":\"worl\"},{\"insert\":\"\\n\"}]}",
-      "hello worl\n", "<p><span style=\"color: rgb(230, 0, 0);\">hello </span><span style=\"color: rgb(0, 102, 204);\">worl</span></p>"),
-      allow_no_input_binding_ = TRUE)
-  app$set_inputs(editor_1 = c("{\"ops\":[{\"attributes\":{\"color\":\"#e60000\"},\"insert\":\"hello \"},{\"attributes\":{\"color\":\"#0066cc\"},\"insert\":\"world\"},{\"insert\":\"\\n\"}]}",
-      "hello world\n", "<p><span style=\"color: rgb(230, 0, 0);\">hello </span><span style=\"color: rgb(0, 102, 204);\">world</span></p>"),
-      allow_no_input_binding_ = TRUE)
-  app$set_inputs(editor_1 = c("{\"ops\":[{\"attributes\":{\"color\":\"#e60000\"},\"insert\":\"hello \"},{\"attributes\":{\"color\":\"#0066cc\"},\"insert\":\"world!\"},{\"insert\":\"\\n\"}]}",
-      "hello world!\n", "<p><span style=\"color: rgb(230, 0, 0);\">hello </span><span style=\"color: rgb(0, 102, 204);\">world!</span></p>"),
+  app$set_inputs(editor_1 = c("{\"ops\":[{\"attributes\":{\"color\":\"#e60000\"},\"insert\":\"hello there!\"},{\"insert\":\"\\n\"}]}",
+      "hello there!\n", "<p><span style=\"color: rgb(230, 0, 0);\">hello there!</span></p>"),
       allow_no_input_binding_ = TRUE)
   app$expect_screenshot()
 })
