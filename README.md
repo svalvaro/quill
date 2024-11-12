@@ -2,6 +2,7 @@
 
 <!-- badges: start -->
 
+[![R-CMD-check](https://github.com/svalvaro/quill/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/svalvaro/quill/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 [Quill](https://quilljs.com/) is an open-source JavaScript library for a text editor. This R package makes it easy to create Quill editors from R.
