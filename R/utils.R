@@ -87,7 +87,7 @@ format_multiple_choice_options <- function(name, value) {
 #' @param bold Logical; `TRUE` or `FALSE` to include/exclude bold functionality.
 #' @param clean Logical; `TRUE` or `FALSE` to include/exclude clean functionality.
 #' @param code Logical; `TRUE` or `FALSE` to include/exclude inline code functionality.
-#' @param `code-block` Logical; `TRUE` or `FALSE` to include/exclude code block functionality.
+#' @param code_block Logical; `TRUE` or `FALSE` to include/exclude code block functionality.
 #' @param color A vector of colors for text color. If empty, default colors will appear,
 #' e.g., `c('red', 'blue', '#32a852')` or `c()`.
 #' @param direction Character; `NULL` or `"rtl"` to set the text input direction.
@@ -109,6 +109,9 @@ format_multiple_choice_options <- function(name, value) {
 #'  `normal_selected" / "normal_unselected"` controls the "Normal" button's inclusion, with
 #'  selection depending on the current default.
 #' @param strike Logical; `TRUE` or `FALSE` to include/exclude strikethrough functionality.
+#' @param blockquote Logical; `TRUE` or `FALSE` to include/exclude blockquote functionality.
+#' @param underline Logical; `TRUE` or `FALSE` to include/exclude underline functionality.
+#' @param video Logical; `TRUE` or `FALSE` to include/exclude video functionality.
 #'
 #' @return list
 #' @export
@@ -136,7 +139,7 @@ toolbar_options <- function(
   script = c("sub", "super"),
   underline = TRUE,
   video = FALSE,
-  `code-block` = TRUE
+  code_block = TRUE
 ) {
   list(
     align = align,
@@ -159,7 +162,7 @@ toolbar_options <- function(
     script = script,
     underline = underline,
     video = video,
-    `code-block` = `code-block`
+    `code-block` = code_block
   )
 }
 

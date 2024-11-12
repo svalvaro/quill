@@ -25,7 +25,7 @@ toolbar_options(
   script = c("sub", "super"),
   underline = TRUE,
   video = FALSE,
-  `code-block` = TRUE
+  code_block = TRUE
 )
 }
 \arguments{
@@ -33,6 +33,8 @@ toolbar_options(
 
 \item{background}{A vector of colors for the background. If empty, default colors will appear,
 e.g., `c('red', 'blue', '#32a852')` or `c()`.}
+
+\item{blockquote}{Logical; `TRUE` or `FALSE` to include/exclude blockquote functionality.}
 
 \item{bold}{Logical; `TRUE` or `FALSE` to include/exclude bold functionality.}
 
@@ -73,7 +75,11 @@ H2, and H3 and 'Normal'.
 
 \item{script}{A vector for script options, e.g., `c("sub", "super")`.}
 
-\item{`code-block`}{Logical; `TRUE` or `FALSE` to include/exclude code block functionality.}
+\item{underline}{Logical; `TRUE` or `FALSE` to include/exclude underline functionality.}
+
+\item{video}{Logical; `TRUE` or `FALSE` to include/exclude video functionality.}
+
+\item{code_block}{Logical; `TRUE` or `FALSE` to include/exclude code block functionality.}
 }
 \value{
 list
