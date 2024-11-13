@@ -1,4 +1,4 @@
-# An R interface to Quill(js)
+# An R interface to QuillJS <a href=""><img src="man/figures/logo.png" align="right" height="138" alt="ggplot2 website" /></a>
 
 <!-- badges: start -->
 
