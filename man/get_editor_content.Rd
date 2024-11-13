@@ -17,4 +17,6 @@ character
 \description{
 This function retrieves the content that the user has writen in the editor.
 It can output it in three formats: "HTML, "JSON" or plain text.
+Remember to put the "_content"; e.g. if you used `output$editor <- renderQuill()`, then
+to listen and get what the user typed use: `get_editor_content(input$editor_content)`
 }

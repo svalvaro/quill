@@ -5,6 +5,8 @@
 \alias{quill-package}
 \title{quill: Provides an R interface for QuillJS, an open-source text editor}
 \description{
+\if{html}{\figure{logo.png}{options: style='float: right' alt='logo' width='120'}}
+
 This package serves as a wrapper for the QuillJS library, allowing R users to integrate a rich text editor into their workflows. Use this package to easily add, customize, and manipulate QuillJS editors from within R scripts and Shiny applications.
 }
 \keyword{internal}

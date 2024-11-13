@@ -35,7 +35,7 @@ HTMLWidgets.widget({
           var contentText = editorWidget.getText();
           var contentHTML = editorWidget.root.innerHTML;
 
-          Shiny.onInputChange(el.id, [contentJSON, contentText, contentHTML]);
+          Shiny.onInputChange(`${el.id}_content`, [contentJSON, contentText, contentHTML]);
         })
       },
 
