@@ -7,6 +7,10 @@
 
 [Quill](https://quilljs.com/) is an open-source JavaScript library to generate rich text editors. This R package makes it easy to create Quill editors from R.
 
+```r
+library(quill)
+quill() 
+```
 ![](man/figures/README-example.png)
 
 ## Installation
@@ -34,11 +38,13 @@ ui <- fluidPage(
 
 server <- function(input, output, ...) {
   ...
-  output$text_editor <- renderQuill(quill())
+  output$text_editor <- renderQuill({
+    quill(toolbar = toolbar_options(code = TRUE)) 
+  })
 
   # You can listen what the user is writing in HTML, JSON, and plain text
-  observeEvent(input$text_editor, {
-    get_editor_content(input$text_editor, format = "HTML")
+  observeEvent(input$text_editor_content, {
+    get_editor_content(input$text_editor_content, format = "HTML")
   }
   ...
 }
