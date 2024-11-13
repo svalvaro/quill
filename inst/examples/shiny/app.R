@@ -4,7 +4,7 @@ ui <- shinyUI(fluidPage(
   div(
     div(
       "This is your new text editor",
-      quillOutput("editor_1")
+      quillOutput("editor")
     ),
     div(
       hr(),
@@ -15,7 +15,7 @@ ui <- shinyUI(fluidPage(
 ))
 
 server <-  function(input, output) {
-  output$editor_1 <- renderQuill({
+  output$editor <- renderQuill({
     quill(
       toolbar = toolbar_options(
         header = list(c(1, 2, "normal_selected", 3, 4)),
@@ -23,15 +23,15 @@ server <-  function(input, output) {
       )
     )
   })
-  observeEvent(input$editor_1, {
+  observeEvent(input$editor_content, {
     cat(
       sep = "\n",
-      get_editor_content(input$editor_1, format = "JSON"),
-      get_editor_content(input$editor_1, format = "HTML"),
-      get_editor_content(input$editor_1, format = "Text")
+      get_editor_content(input$editor_content, format = "JSON"),
+      get_editor_content(input$editor_content, format = "HTML"),
+      get_editor_content(input$editor_content, format = "Text")
     )
   })
-  output$rendered_output <- renderUI(HTML(get_editor_content(input$editor_1, format = "HTML")))
+  output$rendered_output <- renderUI(HTML(get_editor_content(input$editor_content, format = "HTML")))
 }
 
 shinyApp(ui = ui, server = server)
